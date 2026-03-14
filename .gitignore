@@ -1,0 +1,6 @@
+**/__pycache__
+.pytest_cache
+*venv
+.venv*
+routes.http
+schema.db
