@@ -1,3 +1,4 @@
+-- Active: 1773657991697@@127.0.0.1@5432@log_intelligence_test
 CREATE TABLE IF NOT EXISTS request_logs (
     id BIGSERIAL PRIMARY KEY,
     timestamp TIMESTAMP WITH TIME ZONE NOT NULL,

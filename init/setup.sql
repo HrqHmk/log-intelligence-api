@@ -1,0 +1,2 @@
+CREATE DATABASE log_intelligence;
+CREATE DATABASE log_intelligence_test;
