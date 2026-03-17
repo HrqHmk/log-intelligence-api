@@ -2,7 +2,7 @@ from typing import Optional
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 
-DATABASE_URL = "postgresql+asyncpg://docker:docker@localhost/log_intelligence_db"
+DATABASE_URL = "postgresql+asyncpg://docker:docker@localhost/log_intelligence"
 
 engine = create_async_engine(
     DATABASE_URL,

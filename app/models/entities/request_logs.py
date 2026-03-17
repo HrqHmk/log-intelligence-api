@@ -6,7 +6,7 @@ Request_logs = Table(
     "request_logs",
     metadata,
     Column("id", BigInteger, primary_key=True, autoincrement=True),
-    Column("timestamp", DateTime(timezone=False), nullable=False),
+    Column("timestamp", DateTime(timezone=True), nullable=False),
     Column("http_method", String, nullable=False),
     Column("headers", JSONB, nullable=False),
     Column("service", String(100), nullable=False),

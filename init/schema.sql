@@ -1,8 +1,7 @@
 CREATE TABLE IF NOT EXISTS request_logs (
     id BIGSERIAL PRIMARY KEY,
-    timestamp TIMESTAMP NOT NULL,
+    timestamp TIMESTAMP WITH TIME ZONE NOT NULL,
     http_method VARCHAR(10) NOT NULL,
-    request_method VARCHAR(10) NOT NULL,
     headers JSONB NOT NULL,
     service VARCHAR(100) NOT NULL,
     endpoint VARCHAR(100) NOT NULL,
