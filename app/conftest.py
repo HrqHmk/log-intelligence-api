@@ -8,11 +8,11 @@ load_dotenv()
 
 TEST_DATABASE_URL = os.getenv("TEST_DATABASE_URL")
 
-@pytest.fixture(scope="session", name="engine")
+@pytest.fixture(name="engine")
 def engine_fixture():
     return create_async_engine(TEST_DATABASE_URL)
 
-@pytest.fixture(scope="session", name="session_factory")
+@pytest.fixture(name="session_factory")
 def session_factory_fixture(engine):
     return sessionmaker(
         bind=engine,
