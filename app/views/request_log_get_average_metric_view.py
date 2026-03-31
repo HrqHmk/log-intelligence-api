@@ -7,7 +7,7 @@ class RequestLogGetAverageMetricView:
     def __init__(self, controller: GetAverageMetricsLatencyRequestLogsInterface):
         self.__controller = controller
 
-    async def handle_insert_request_log(self, http_request: HttpRequest) -> HttpResponse:
+    async def handle_get_request_log_average_metric(self, http_request: HttpRequest) -> HttpResponse:
         try:
             endpoint = http_request.path_params["endpoint"]
             response = await self.__controller.get_average_metrics_latency(endpoint)

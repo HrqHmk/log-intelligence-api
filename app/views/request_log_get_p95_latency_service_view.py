@@ -7,7 +7,7 @@ class RequestLogGetP95LatencyServiceView:
     def __init__(self, controller: GetP95LatencyServiceRequestLogsInterface):
         self.__controller = controller
 
-    async def handle_insert_request_log(self, http_request: HttpRequest) -> HttpResponse:
+    async def handle_get_request_log_p95_latency(self, http_request: HttpRequest) -> HttpResponse:
         try:
             service = http_request.path_params["service"]
             response = await self.__controller.get_p95_latency_service(service)

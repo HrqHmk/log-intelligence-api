@@ -7,7 +7,7 @@ class RequestLogGetErrorRateServiceView:
     def __init__(self, controller: GetErrorRateServiceRequestLogsInterface):
         self.__controller = controller
 
-    async def handle_insert_request_log(self, http_request: HttpRequest) -> HttpResponse:
+    async def handle_get_request_log_error_rate(self, http_request: HttpRequest) -> HttpResponse:
         try:
             service = http_request.path_params["service"]
             response = await self.__controller.get_error_rate_service(service)
