@@ -19,7 +19,7 @@ async def test_handle_get_p95_latency_service():
         path_params={"service": "user-service"}
     )
 
-    response = await view.handle_insert_request_log(http_request)
+    response = await view.handle_get_request_log_p95_latency(http_request)
 
     assert controller_mock.get_called is True
     assert controller_mock.service == "user-service"

@@ -19,7 +19,7 @@ async def test_handle_get_average_metrics_latency():
         path_params={"endpoint": "user-service"}
     )
 
-    response = await view.handle_insert_request_log(http_request)
+    response = await view.handle_get_request_log_average_metric(http_request)
 
     assert controller_mock.get_called is True
     assert controller_mock.endpoint == "user-service"
