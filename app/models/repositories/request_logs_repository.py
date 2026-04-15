@@ -78,7 +78,7 @@ class RequestLogsRepository:
                 select(
                     Request_logs.c.service,
                     func.percentile_cont(0.95)
-                    .within_group(Request_logs.c.response_time_ms).label("p95_latency")
+                    .within_group(Request_logs.c.response_time_ms.asc()).label("p95_latency_ms")
                 )
                 .where(Request_logs.c.service == service)
                 .group_by(Request_logs.c.service)
@@ -88,7 +88,9 @@ class RequestLogsRepository:
             return [
                 {
                     "service": row.service,
-                    "p95_latency_ms": float(row.p95_latency)
+                    "p95_latency_ms": round(float(row.p95_latency_ms), 2)
+                    if row.p95_latency_ms is not None
+                    else None
                 }
                 for row in rows
             ]
