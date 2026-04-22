@@ -81,3 +81,20 @@ async def test_get_p95_latency_service_request_logs(session_factory):
         assert isinstance(item["service"], str)
         assert isinstance(item["p95_latency_ms"], (float, type(None)))
         assert item["service"] == service
+
+@pytest.mark.asyncio
+async def test_get_metrics_grouped_by_minute(session_factory):
+    repository = RequestLogsRepository(
+        lambda: DbConnectionHandler(session_factory)
+    )
+
+    service = "checkout-service"
+    response = await repository.get_metrics_grouped_by_minute(service)
+    for item in response:
+        assert "minute" in item
+        assert "average_latency_ms" in item
+        assert "error_rate" in item
+        assert isinstance(item["minute"], str)
+        assert isinstance(item["average_latency_ms"], (float, type(None)))
+        assert isinstance(item["error_rate"], (float, type(None)))
+        assert 0.0 <= item["error_rate"] <= 100.0

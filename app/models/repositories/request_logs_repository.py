@@ -94,3 +94,34 @@ class RequestLogsRepository:
                 }
                 for row in rows
             ]
+
+    async def get_metrics_grouped_by_minute(self, service: str) -> list[dict]:
+        async with self.db_handler_factory() as db:
+            minute_col = func.date_trunc('minute', Request_logs.c.timestamp).label('minute')
+
+            query = (
+                select(
+                    minute_col,
+                    func.avg(Request_logs.c.response_time_ms).label('average_latency_ms'),
+                    func.avg(
+                        case(
+                            (Request_logs.c.status_code >= 500, 1),
+                            else_=0
+                        )
+                    ).label('error_rate')
+                )
+                .where(Request_logs.c.service == service)
+                .group_by(minute_col)
+                .order_by(minute_col)
+            )
+            result = await db.session.execute(query)
+            rows = result.all()
+            return [
+                {
+                    "service": service,
+                    "minute": row.minute.isoformat(),
+                    "average_latency_ms": float(row.average_latency_ms),
+                    "error_rate": float(row.error_rate) * 100
+                }
+                for row in rows
+            ]
