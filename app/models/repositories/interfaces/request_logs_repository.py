@@ -16,3 +16,6 @@ class RequestLogsRepositoryInterface(ABC):
 
     @abstractmethod
     async def get_p95_latency_service_request_logs(self, service: str) -> list[dict]: pass
+
+    @abstractmethod
+    async def get_metrics_grouped_by_minute(self, service: str) -> list[dict]: pass
