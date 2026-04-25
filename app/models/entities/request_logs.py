@@ -1,4 +1,4 @@
-from sqlalchemy import Table, Column, Integer, String, DateTime, BigInteger, Text
+from sqlalchemy import Table, Column, Integer, String, DateTime, BigInteger
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from app.models.settings.metadata import metadata
 
