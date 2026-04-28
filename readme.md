@@ -15,6 +15,7 @@ Com ela, é possível analisar:
 - Latência média por endpoint
 - Taxa de erro por serviço
 - Percentil 95 (p95) de latência
+- Detecção de Anomalias por serviço
 
 ---
 
@@ -26,6 +27,7 @@ Com ela, é possível analisar:
 - PostgreSQL
 - Docker
 - Pytest
+- Scikit-learn
 
 ---
 
@@ -35,6 +37,7 @@ Com ela, é possível analisar:
 - [x] Cálculo de latência média por endpoint
 - [x] Cálculo de taxa de erro por serviço
 - [x] Cálculo de p95 de latência
+- [x] Detecção de anomalias por serviço
 - [ ] Autenticação
 - [ ] Melhorias de performance
 - [ ] Observabilidade avançada
@@ -46,9 +49,10 @@ Com ela, é possível analisar:
 | Método | Rota | Descrição |
 |------|------|----------|
 | POST | /request-logs | Registra um novo log |
-| GET | /request-logs/average-metric/{endpoint} | Latência média |
+| GET | /request-logs/average-latency/{endpoint} | Latência média |
 | GET | /request-logs/error-rate/{service} | Taxa de erro |
 | GET | /request-logs/p95-latency/{service} | p95 de latência |
+| GET | /request-logs/anomalies/{service} | Detecta anomalias nos logs do serviço |
 
 ---
 
@@ -77,6 +81,31 @@ POST /request-logs
 ```
 ---
 
+### Detectar anomalias por serviço
+```json
+GET /request-logs/anomalies/user-service
+```
+### Resposta Esperada
+```json
+[
+  {
+    "response_time_ms": 5000,
+    "status_code": 500,
+    "anomaly_score": -0.21,
+    "is_anomaly": true
+  }
+]
+```
+---
+## 🤖 Inteligência Artificial aplicada
+
+A funcionalidade de detecção de anomalias utiliza o algoritmo Isolation Forest, capaz de identificar comportamentos incomuns em logs com base em padrões como:
+
+* Tempo de resposta elevado
+* Status code fora do padrão
+* Requisições discrepantes em relação ao histórico
+
+---
 ### Como rodar o projeto
 
 Siga os passos abaixo para executar a API localmente

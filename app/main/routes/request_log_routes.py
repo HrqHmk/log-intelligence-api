@@ -33,7 +33,7 @@ async def get_error_rate(service: str):
         status_code=http_response.status_code
     )
 
-@request_log_routes.get("/request-logs/average-metric/{endpoint}")
+@request_log_routes.get("/request-logs/metrics/average-latency/{endpoint}")
 async def get_average_metric(endpoint: str):
     http_request = HttpRequest(path_params={"endpoint": endpoint})
     request_log_average_metric = request_log_get_average_metric_composer()
@@ -53,7 +53,7 @@ async def get_p95_latency(service: str):
         status_code=http_response.status_code
     )
 
-@request_log_routes.get("/request-logs/anomaly-service/{service}")
+@request_log_routes.get("/request-logs/anomalies/{service}")
 async def get_anomaly_service(service: str):
     http_request = HttpRequest(path_params={"service": service})
     request_log_anomaly_service = request_log_get_anomaly_service_composer()
